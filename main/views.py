@@ -252,7 +252,7 @@ def index(request, streams_url=''):
 
 
 def view_streams(request, streams_url=''):
-	
+
 	has_blanks = False
 	old_url_format = False
 	
@@ -299,11 +299,15 @@ def view_streams(request, streams_url=''):
 	for layout in layout_group:
 		layout.assign_tags(streams)
 
+	player_type = request.GET.get('player', settings.PLAYER_TYPE)
+	if player_type not in settings.VALID_PLAYER_TYPES:
+		player_type = settings.PLAYER_TYPE
+
 	c = RequestContext(request, {
 		'layout_groups': LAYOUT_GROUPS,
 		'layout_group': layout_group,
 		'use_live_embeds' : settings.USE_LIVE_EMBEDS,
-		'player_type' : settings.PLAYER_TYPE,
+		'player_type' : player_type,
 		'edit_url': '/' + settings.URL_INFIX + 'edit/%s/' % ('/'.join(streams).lower()),
 		'client_id': CLIENT_ID,
 	})

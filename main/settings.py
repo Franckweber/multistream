@@ -3,7 +3,8 @@ import os.path
 # Django settings for multistream project.
 
 from site_specific_settings import *
-PLAYER_TYPE = "twitchnew"
+VALID_PLAYER_TYPES = ["twitchold", "twitchnew", "videojs"]
+PLAYER_TYPE = "twitchold"
 
 MANAGERS = ADMINS
 
