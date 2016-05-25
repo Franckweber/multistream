@@ -4,17 +4,23 @@
 		{% block head %}
 		<title>KBMOD Multistream | The KBMOD Gaming Community</title>
 		{% endblock head %}
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-		<script src="https://ttv-api.s3.amazonaws.com/twitch.min.js"></script>
-		<script src="https://player.twitch.tv/js/embed/v1.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.js"></script>
-		<script type="text/javascript" src="{{ base_url }}static/jquery.cointipper-pack.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="//ttv-api.s3.amazonaws.com/twitch.min.js"></script>
+		{% if player_type == "twitchnew" %}
+		<script src="//player.twitch.tv/js/embed/v1.js"></script>
+		{% endif %}
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.js"></script>
 		<script type="text/javascript" src="{{ base_url }}static/plugins.js"></script>
+		{% if player_type == "videojs" %}
+		<script type="text/javascript" src="{{ base_url }}static/videojs/video.min.js"></script>
+		<script type="text/javascript" src="{{ base_url }}static/videojs/videojs-contrib-hls.min.js"></script>
+		{% endif %}
 		<script type="text/javascript" src="{{ base_url }}static/script.js"></script>
 		<script type="text/javascript">
 			var base_url = "{{ base_url }}";
 			var player_objs = {};
+			var player_type = "{{ player_type }}";
 			var layout_groups = { {% for g in layout_groups %}{{ forloop.counter }}: { {% for l in g %}{{ l.index }}: {'haschat': {% if l.has_chat %}true{% else %}false{% endif %},},{% endfor %} },{% endfor %} };
 			
 			Twitch.init({clientId: "{{ client_id }}"},
@@ -30,8 +36,10 @@
 		<link href="{{ base_url }}static/images/favicon.png" rel="shortcut icon"/>	
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
 		<link href='https://fonts.googleapis.com/css?family=PT+Sans:400italic,700italic,400,700' rel='stylesheet' type='text/css' />
-		<link rel="stylesheet" type="text/css" href="{{ base_url }}static/jquery.cointipper.min.css" />
 		<link rel="stylesheet" type="text/css" href="{{ base_url }}static/multistream.css" />
+		{% if player_type == "videojs" %}
+		<link rel="stylesheet" type="text/css" href="{{ base_url }}static/videojs/video-js.min.css" />
+		{% endif %}
 		{% block styles %}
 		{% endblock styles %}
 	</head>

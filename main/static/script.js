@@ -167,14 +167,6 @@ $(document).ready( function() {
 			update_filters();
 		});
 		
-		$element.find('.bitcoin-tip').coinTipper({
-			type: 'tip',
-			currency: 'bitcoin',
-			iso: 'BTC',
-			address: '1JVbX2swtrn2ydSik8Q8zweUXWDnxXniyg',
-			label: 'The Multistream Dev Tip Jar'
-		});
-		
 
 		$element.find('.tabs').tabs();
 		sync_layout();
@@ -455,23 +447,31 @@ $(document).ready( function() {
 		$other_ovr.removeClass('audio');
 		$new_ovr.addClass('audio');
 
-		//old player code
-		/*
-		$other_str.find('object,embed').each(function(){
-			try { $(this)[0].mute(); }
-			catch(e) {}
-		});
-		$new_str.find('object,embed').each(function(){
-			try { $(this)[0].unmute(); }
-			catch(e) {}
-		});
-		*/
-		for(key in player_objs) {
-			if(player_objs[key].getChannel() == tag) {
-				player_objs[key].setMuted(false);
-			} else {
-				player_objs[key].setMuted(true);
+		if(typeof(player_type) === 'undefined') player_type = '';
+
+		if(player_type == "twitchold") {
+			$other_str.find('object,embed').each(function(){
+				try { $(this)[0].mute(); }
+				catch(e) {}
+			});
+			$new_str.find('object,embed').each(function(){
+				try { $(this)[0].unmute(); }
+				catch(e) {}
+			});
+		}
+
+		if(player_type == "twitchnew") {
+			for(key in player_objs) {
+				if(player_objs[key].getChannel() == tag) {
+					player_objs[key].setMuted(false);
+				} else {
+					player_objs[key].setMuted(true);
+				}
 			}
+		}
+
+		if(player_type == "videojs") {
+
 		}
 	}
 
