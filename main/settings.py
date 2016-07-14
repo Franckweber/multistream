@@ -4,7 +4,7 @@ import os.path
 
 from site_specific_settings import *
 VALID_PLAYER_TYPES = ["twitchold", "twitchnew", "videojs"]
-PLAYER_TYPE = "twitchold"
+PLAYER_TYPE = "twitchnew"
 
 MANAGERS = ADMINS
 
