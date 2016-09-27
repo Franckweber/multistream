@@ -184,14 +184,10 @@ $(document).ready( function() {
 		});
 		$element.find('button.reloadstream[data-tag]').click(function(e) {
 			e.preventDefault();
-			$('.streamcontainer[data-tag="'+ $(this).attr('data-tag') +'"]').find('object').attr( 'data', function ( i, val ) { return val; });
+			$('.streamcontainer[data-tag="'+ $(this).attr('data-tag') +'"]').find('iframe').attr( 'src', function ( i, val ) { return val; });
 			
 			if($(this).attr('data-tag') == get_current_audio()) {
-				$('.streamcontainer[data-tag="'+ $(this).attr('data-tag') +'"]').find('object')
-					.each(function(){
-						try { $(this)[0].unmute(); }
-						catch(e) {}
-					});
+				choose_stream_audio($(this).attr('data-tag'));
 			}
 		});
 		$element.find('.chatmenuopener').click( function() {
