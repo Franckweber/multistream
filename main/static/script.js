@@ -469,10 +469,6 @@ $(document).ready( function() {
 				}
 			}
 		}
-
-		if(player_type == "videojs") {
-
-		}
 	}
 
 	function choose_stream_chat(tag) {
